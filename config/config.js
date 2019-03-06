@@ -10,5 +10,7 @@ module.exports = {
         app: {
             name: 'rbmania'
         }
-    }
+    },
+    configName: 'g3c4T0k3n#!',
+    expireInTime: 10800
 };
