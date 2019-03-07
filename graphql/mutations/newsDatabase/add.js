@@ -1,6 +1,7 @@
 const GraphQLNonNull = require('graphql').GraphQLNonNull;
 const GraphQLString = require('graphql').GraphQLString;
 const GraphQLBoolean = require('graphql').GraphQLBoolean;
+const moment = require('moment');
 const NewsDatabaseType = require('../../types/newsDatabase');
 const NewsDatabaseModel = require('../../../models/newsDatabase');
 
@@ -18,6 +19,8 @@ exports.add = {
     }
   },
   resolve(root, params) {
+    params.createDate = moment();
+    params.lastUpdateDate = moment();
     const uModel = new NewsDatabaseModel(params);
     const newDataBase = uModel.save();
     if (!newDataBase) {

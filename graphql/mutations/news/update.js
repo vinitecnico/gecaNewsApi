@@ -1,6 +1,7 @@
 const GraphQLNonNull = require('graphql').GraphQLNonNull;
 const GraphQLString = require('graphql').GraphQLString;
 const GraphQLBoolean = require('graphql').GraphQLBoolean;
+const moment = require('moment');
 const NewsType = require('../../types/news');
 const newsModel = require('../../../models/news');
 
@@ -27,7 +28,7 @@ exports.update = {
   resolve(root, params) {
     return newsModel.findByIdAndUpdate(
       params.id,
-      { $set: { title: params.title, description: params.description, imageUrl: params.imageUrl, status:  params.status} },
+      { $set: { title: params.title, description: params.description, imageUrl: params.imageUrl, status:  params.status, lastUpdateDate: moment()} },
       { new: true }
     )
       .catch(err => new Error(err));

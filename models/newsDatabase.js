@@ -12,6 +12,12 @@ const newsDatabaseSchema = new Schema({
   },
   status: {
     type: Boolean
+  },
+  createDate: {
+    type: Date
+  },
+  lastUpdateDate: {
+    type: Date
   }
 });
 const Model = mongoose.model('newsDatabases', newsDatabaseSchema);

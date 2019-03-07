@@ -16,6 +16,12 @@ const newsSchema = new Schema({
   },
   status: {
     type: Boolean
+  },
+  createDate: {
+    type: String
+  },
+  lastUpdateDate: {
+    type: String
   }
 });
 const Model = mongoose.model('news', newsSchema);
