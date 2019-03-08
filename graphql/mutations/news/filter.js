@@ -12,10 +12,10 @@ exports.filter = {
             type: GraphQLString
         },
         page: {
-            type: GraphQLInt
+            type: GraphQLString
         },
         perPage: {
-            type: GraphQLInt
+            type: GraphQLString
         },
         active: {
             type: GraphQLString
@@ -34,8 +34,8 @@ exports.filter = {
             direction: params.direction ? params.direction : 'asc'
         };
         const pagination = {
-            page: params.page || 1,
-            perPage: params.perPage || 10
+            page: parseInt(params.page) || 1,
+            perPage: parseInt(params.perPage) || 10
         };
 
         let filter = {};
