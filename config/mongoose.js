@@ -4,7 +4,7 @@ var env = process.env.NODE_ENV || 'production',
 
 module.exports = function () {
     mongoose.Promise = global.Promise;
-    var db = mongoose.connect(config.db);
+    var db = mongoose.connect(config.db, { useNewUrlParser: true });
     mongoose.connection.on('error', function (err) {
         console.log('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
     }).on('open', function () {

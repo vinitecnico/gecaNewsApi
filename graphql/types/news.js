@@ -3,6 +3,7 @@ const GraphQLNonNull = require('graphql').GraphQLNonNull;
 const GraphQLID = require('graphql').GraphQLID;
 const GraphQLString = require('graphql').GraphQLString;
 const GraphQLBoolean = require('graphql').GraphQLBoolean;
+const GraphQLInt = require('graphql').GraphQLInt;
 
 // news Type
 exports.newsType = new GraphQLObjectType({
@@ -23,6 +24,9 @@ exports.newsType = new GraphQLObjectType({
       },
       status: {
         type: GraphQLBoolean
+      },
+      showTimeMilliseconds: {
+        type: GraphQLInt
       }
     }
   }

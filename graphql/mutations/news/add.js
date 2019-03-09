@@ -1,5 +1,6 @@
 const GraphQLNonNull = require('graphql').GraphQLNonNull;
 const GraphQLString = require('graphql').GraphQLString;
+const GraphQLInt = require('graphql').GraphQLInt;
 const GraphQLBoolean = require('graphql').GraphQLBoolean;
 const moment = require('moment');
 const NewsType = require('../../types/news');
@@ -19,6 +20,9 @@ exports.add = {
     },
     status: {
       type: GraphQLBoolean
+    },
+    showTimeMilliseconds: {
+      type: GraphQLInt
     }
   },
   resolve(root, params) {

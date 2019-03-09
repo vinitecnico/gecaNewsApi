@@ -17,6 +17,9 @@ const newsSchema = new Schema({
   status: {
     type: Boolean
   },
+  showTimeMilliseconds: {
+    type: Number
+  },
   createDate: {
     type: String
   },

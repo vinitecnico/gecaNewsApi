@@ -1,25 +1,17 @@
-const GraphQLNonNull = require('graphql').GraphQLNonNull;
-const GraphQLString = require('graphql').GraphQLString;
+'use strict';
+
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
-const LoginType = require('../../types/login');
-const UserModel = require('../../../models/user');
-const config = require('../../../config/config');
+const config = require('../config/config');
 
-exports.login = {
-    type: LoginType.loginType,
-    args: {
-        email: {
-            type: new GraphQLNonNull(GraphQLString),
-        },
-        password: {
-            type: new GraphQLNonNull(GraphQLString),
-        }
-    },
-    resolve(root, params) {
-        const user = UserModel.findOne({ email: params.email, password: md5(params.password) }).exec();
-        return user
-            .then((response) => {
+module.exports = function (app, mongo) {
+    app.post('/api/login', function (req, res) {
+        const params = req.body;
+        const user = { email: params.username, password: md5(params.password) };
+        mongo.then((db) => {            
+            const login = db.models.user.findOne(user).exec();
+
+            return login.then((response) => {
                 let obj = {};
                 if (response) {
                     obj = {
@@ -38,10 +30,12 @@ exports.login = {
                     }
                 }
 
-                return obj;
+                res.status(obj.status).json(obj);
             })
             .catch((e) => {
                 console.log(e);
             });
-    }
-}
+            
+        });
+    });
+};

@@ -2,7 +2,6 @@ const addUser = require('./user/add').add;
 const removeUser = require('./user/remove').remove;
 const updateUser = require('./user/update').update;
 const filterUser = require('./user/filter').filter;
-const loginUser = require('./user/login').login;
 const addNewsDatabase = require('./newsDatabase/add').add;
 const updateNewsDatabase = require('./newsDatabase/update').update;
 const removeNewsDatabase = require('./newsDatabase/remove').remove;
@@ -19,7 +18,6 @@ module.exports = {
   removeUser,
   updateUser,
   filterUser,
-  loginUser,
   addNewsDatabase,
   updateNewsDatabase,
   removeNewsDatabase,
