@@ -48,7 +48,7 @@ app.use('/graphql', cors(), graphqlHTTP({
 }));
 
 require('./api/login')(app, db);
-// require('./api/uploadfile')(app);
+require('./api/uploadfile')(app);
 
 // Up and Running at Port 4000
 app.listen(process.env.PORT || 4000, () => {
