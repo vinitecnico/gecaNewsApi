@@ -29,7 +29,7 @@ module.exports = function (app) {
                                     url: resDpx.url,
                                     fileName: req.file.originalname
                                 };
-                                response.status(status.OK).send(data);
+                                res.status(status.OK).send(data);
                             });
                     })
                     .catch((error) => {

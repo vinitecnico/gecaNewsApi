@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('*', cors());
 
 app.use(function (req, res, next) {
-  if (req.originalUrl.indexOf('login') < 0 && req.originalUrl.indexOf('uploadfile') < 0) {
+  if (req.originalUrl.indexOf('login') < 0) {
     const tokens = req.headers['authorization'].replace('Bearer ', '');
     if (tokens) {
       jwt.verify(tokens, require("./config/config").configName, (err, decoded) => {
