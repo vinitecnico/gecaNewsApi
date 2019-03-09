@@ -16,7 +16,10 @@ exports.add = {
       type: new GraphQLNonNull(GraphQLString)
     },
     imageUrl: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: GraphQLString
+    },
+    fileName: {
+      type: GraphQLString
     },
     status: {
       type: GraphQLBoolean

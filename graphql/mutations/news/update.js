@@ -20,7 +20,10 @@ exports.update = {
       type: new GraphQLNonNull(GraphQLString)
     },
     imageUrl: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: GraphQLString
+    },
+    fileName: {
+      type: GraphQLString
     },
     status: {
       type: GraphQLBoolean
@@ -34,8 +37,8 @@ exports.update = {
       params.id,
       {
         $set: {
-          title: params.title, description: params.description, imageUrl: params.imageUrl, status: params.status,
-          showTimeMilliseconds: params.showTimeMilliseconds, lastUpdateDate: moment()
+          title: params.title, description: params.description, imageUrl: params.imageUrl, fileName: params.fileName,
+          status: params.status, showTimeMilliseconds: params.showTimeMilliseconds, lastUpdateDate: moment()
         }
       },
       { new: true }
