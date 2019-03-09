@@ -2,6 +2,7 @@ const GraphQLObjectType = require('graphql').GraphQLObjectType;
 const GraphQLNonNull = require('graphql').GraphQLNonNull;
 const GraphQLID = require('graphql').GraphQLID;
 const GraphQLString = require('graphql').GraphQLString;
+const GraphQLInt = require('graphql').GraphQLInt;
 const GraphQLBoolean = require('graphql').GraphQLBoolean;
 const GraphQLList = require('graphql').GraphQLList;
 
