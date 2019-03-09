@@ -42,8 +42,8 @@ exports.filter = {
         if (params.value) {
             filter = {
                 $or: [
-                    { "name": { "$regex": request.query.value, "$options": "i" } },
-                    { "url": { "$regex": request.query.value, "$options": "i" } }
+                    { "name": { "$regex": params.value, "$options": "i" } },
+                    { "url": { "$regex": params.value, "$options": "i" } }
                 ]
             };
         }
