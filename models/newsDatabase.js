@@ -10,6 +10,10 @@ const newsDatabaseSchema = new Schema({
     type: String,
     required: true
   },
+  type: {
+    type: String,
+    required: true
+  },
   status: {
     type: Boolean
   },

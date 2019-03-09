@@ -18,6 +18,9 @@ exports.newsDatabaseType = new GraphQLObjectType({
       url: {
         type: new GraphQLNonNull(GraphQLString)
       },
+      type: {
+        type: new GraphQLNonNull(GraphQLString)
+      },
       status: {
         type: GraphQLBoolean
       }

@@ -18,6 +18,9 @@ exports.update = {
     url: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    type: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
     status: {
       type: GraphQLBoolean,
     }
@@ -25,7 +28,7 @@ exports.update = {
   resolve(root, params) {
     return newsDatabaseModel.findByIdAndUpdate(
       params.id,
-      { $set: { name: params.name, url: params.url, status:  params.status, lastUpdateDate: moment()} },
+      { $set: { name: params.name, url: params.url, status:  params.status, type: params.type, lastUpdateDate: moment()} },
       { new: true }
     )
       .catch(err => new Error(err));
