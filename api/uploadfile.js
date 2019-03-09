@@ -9,11 +9,11 @@ const config = require('../config/config');
 const dbx = new Dropbox({ accessToken: config.keyDropbox, fetch: fetch });
 
 
-module.exports = function (app) {
-    const params = req.body;
+module.exports = function (app) {    
     const storage = multer.memoryStorage({});
     const upload = multer({ storage: storage }).single('file');
     app.post('/api/uploadfile', function (req, res) {
+        const params = req.body;
         upload(req, res, function (err) {
             if (err) {
                 res.json({ error_code: 1, err_desc: err });
