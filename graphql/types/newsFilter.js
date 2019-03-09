@@ -19,10 +19,16 @@ const data = new GraphQLObjectType({
                 type: new GraphQLNonNull(GraphQLString)
             },
             imageUrl: {
-                type: new GraphQLNonNull(GraphQLString)
+                type: GraphQLString
+            },
+            fileName: {
+                type: GraphQLString
             },
             status: {
                 type: GraphQLBoolean
+            },
+            showTimeMilliseconds: {
+              type: GraphQLInt
             }
         }
     }
