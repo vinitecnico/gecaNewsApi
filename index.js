@@ -1,15 +1,12 @@
 const express = require("express");
 const mongoose = require('./config/mongoose');
 const graphqlHTTP = require("express-graphql");
-const cors = require("cors");
 const db = mongoose();
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(cors({origin: '*'}));
 
 app.use(function (req, res, next) {
   if (req.originalUrl.indexOf('login') < 0 && req.originalUrl.indexOf('news') < 0) {
@@ -50,6 +47,14 @@ app.use('/graphql', cors({origin: '*'}), graphqlHTTP({
 require('./api/login')(app, db);
 require('./api/uploadfile')(app);
 require('./api/news')(app, db);
+
+const cors = require('cors')
+
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+}
+app.use(cors(corsOptions));
 
 // Up and Running at Port 4000
 app.listen(process.env.PORT || 4000, () => {
