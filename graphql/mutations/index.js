@@ -12,6 +12,7 @@ const updateNews = require('./news/update').update;
 const removeNews = require('./news/remove').remove;
 const getByIdNews = require('./news/getById').getById;
 const filterNews = require('./news/filter').filter;
+const dashboard = require('./home/dashboard').dashboard;
 
 module.exports = {
   addUser,
@@ -27,5 +28,6 @@ module.exports = {
   updateNews,
   removeNews,
   getByIdNews,
-  filterNews
+  filterNews,
+  dashboard
 }
