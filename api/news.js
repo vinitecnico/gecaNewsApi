@@ -3,6 +3,7 @@
 const Q = require('q');
 const _ = require("lodash");
 const httpRequest = require('request');
+const convert = require('xml-js');
 
 module.exports = function (app, mongo) {
 
@@ -22,6 +23,47 @@ module.exports = function (app, mongo) {
                 return defer.resolve();
             } else {
                 return defer.resolve(JSON.parse(body));
+            }
+        });
+
+        return defer.promise;
+    }
+
+    const getXMLItems = (urlDatabase) => {
+        const defer = Q.defer();
+
+        const clientServerOptions = {
+            uri: urlDatabase,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        httpRequest(clientServerOptions, (error, response, body) => {
+            if (error) {
+                return defer.resolve();
+            } else {
+                const result = JSON.parse(convert.xml2json(body, { compact: true, spaces: 4 }));
+                const items = result && result.rss && result.rss.channel && result.rss.channel.item ?
+                    result.rss.channel.item : result;
+                const data = [];
+                _.each(items, (x) => {
+                    const item = {
+                        title: x.title ? x.title._cdata : null,
+                        description: x.description ? x.description._text : null,
+                        imageUrl: x['media:content'] && x['media:content']._attributes && x['media:content']._attributes.url ?
+                            x['media:content']._attributes.url : null,
+                        fileName: null,
+                        status: true,
+                        showTimeMilliseconds: 1000,
+                        createDate: null,
+                        lastUpdateDate: null,
+                        author: 'UOL'
+                    }
+                    data.push(item);
+                });
+                return defer.resolve(data);
             }
         });
 
@@ -50,6 +92,10 @@ module.exports = function (app, mongo) {
                     _.each(databases, (x) => {
                         if (x.type == 'JSON') {
                             promises.push(getJSONItems(x.url));
+                        } else {
+                            if (x.name == 'UOL') {
+                                promises.push(getXMLItems(x.url));
+                            }
                         }
                     });
 
