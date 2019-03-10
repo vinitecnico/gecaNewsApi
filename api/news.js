@@ -67,7 +67,8 @@ module.exports = function (app, mongo) {
                                                 status: true,
                                                 showTimeMilliseconds: 1000,
                                                 createDate: null,
-                                                lastUpdateDate: null
+                                                lastUpdateDate: null,
+                                                author: y.author
                                             }
                                             data.push(item);
                                         });
