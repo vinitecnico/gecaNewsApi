@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('*', cors());
 
 app.use(function (req, res, next) {
-  if (req.originalUrl.indexOf('login') < 0) {
+  if (req.originalUrl.indexOf('login') < 0 && req.originalUrl.indexOf('news') < 0) {
     const tokens = req.headers['authorization'].replace('Bearer ', '');
     if (tokens) {
       jwt.verify(tokens, require("./config/config").configName, (err, decoded) => {
@@ -49,6 +49,7 @@ app.use('/graphql', cors(), graphqlHTTP({
 
 require('./api/login')(app, db);
 require('./api/uploadfile')(app);
+require('./api/news')(app, db);
 
 // Up and Running at Port 4000
 app.listen(process.env.PORT || 4000, () => {
