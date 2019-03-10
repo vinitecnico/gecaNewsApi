@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('*', cors());
+app.use(cors());
 
 app.use(function (req, res, next) {
   if (req.originalUrl.indexOf('login') < 0 && req.originalUrl.indexOf('news') < 0) {
