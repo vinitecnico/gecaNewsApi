@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors());
+app.use(cors({origin: '*'}));
 
 app.use(function (req, res, next) {
   if (req.originalUrl.indexOf('login') < 0 && req.originalUrl.indexOf('news') < 0) {
@@ -41,7 +41,7 @@ app.use(function (req, res, next) {
 });
 
 const querySchema = require('./graphql/index').querySchema;
-app.use('/graphql', cors(), graphqlHTTP({
+app.use('/graphql', cors({origin: '*'}), graphqlHTTP({
   schema: querySchema,
   rootValue: global,
   graphiql: true
