@@ -119,7 +119,7 @@ module.exports = function (app, mongo) {
                                             data.push(item);
                                         });
                                     } else {
-                                        data.concat(x);
+                                        data = _.concat(data, x);
                                     }
                                 });
                             }
