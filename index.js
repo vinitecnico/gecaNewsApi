@@ -11,34 +11,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('*', cors());
 
-app.use(function (req, res, next) {
-  if (req.originalUrl.indexOf('login') < 0 && req.originalUrl.indexOf('news') < 0) {
-    const tokens = req.headers['authorization'].replace('Bearer ', '');
-    if (tokens) {
-      jwt.verify(tokens, require("./config/config").configName, (err, decoded) => {
-        if (err) {
-          return res.status(403).send({
-            success: false,
-            message: 'Falha ao tentar autenticar o token!'
-          });
-        } else {
-          //se tudo correr bem, salver a requisição para o uso em outras rotas
-          req.decoded = decoded;
-          next();
-        }
-      });
+// app.use(function (req, res, next) {
+//   if (req.originalUrl.indexOf('login') < 0 && req.originalUrl.indexOf('news') < 0) {
+//     const tokens = req.headers['authorization'].replace('Bearer ', '');
+//     if (tokens) {
+//       jwt.verify(tokens, require("./config/config").configName, (err, decoded) => {
+//         if (err) {
+//           return res.status(403).send({
+//             success: false,
+//             message: 'Falha ao tentar autenticar o token!'
+//           });
+//         } else {
+//           //se tudo correr bem, salver a requisição para o uso em outras rotas
+//           req.decoded = decoded;
+//           next();
+//         }
+//       });
 
-    } else {
-      //se não tiver o token, retornar o erro 403
-      return res.status(403).send({
-        success: false,
-        message: 'Não há token.'
-      });
-    }
-  } else {
-    next();
-  }
-});
+//     } else {
+//       //se não tiver o token, retornar o erro 403
+//       return res.status(403).send({
+//         success: false,
+//         message: 'Não há token.'
+//       });
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
 const querySchema = require('./graphql/index').querySchema;
 app.use('/graphql', cors(), graphqlHTTP({
