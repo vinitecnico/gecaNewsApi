@@ -9,6 +9,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(cors());
+
 app.use(function (req, res, next) {
   if (req.originalUrl.indexOf('login') < 0 && req.originalUrl.indexOf('news') < 0) {
     const tokens = req.headers['authorization'].replace('Bearer ', '');
@@ -39,7 +41,7 @@ app.use(function (req, res, next) {
 });
 
 const querySchema = require('./graphql/index').querySchema;
-app.use('/graphql', cors({origin: '*'}), graphqlHTTP({
+app.use('/graphql', cors(), graphqlHTTP({
   schema: querySchema,
   rootValue: global,
   graphiql: true
@@ -55,7 +57,7 @@ var corsOptions = {
   origin: '*',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
 }
-app.use(cors(corsOptions));
+
 
 // Up and Running at Port 4000
 app.listen(process.env.PORT || 4000, () => {
