@@ -51,14 +51,6 @@ require('./api/login')(app, db);
 require('./api/uploadfile')(app);
 require('./api/news')(app, db);
 
-
-
-var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
-}
-
-
 // Up and Running at Port 4000
 app.listen(process.env.PORT || 4000, () => {
   console.log('A GraphQL API running at port 4000');
