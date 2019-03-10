@@ -2,6 +2,7 @@
 
 const Q = require('q');
 const _ = require("lodash");
+const cors = require("cors");
 const httpRequest = require('request');
 
 module.exports = function (app, mongo) {
@@ -28,7 +29,7 @@ module.exports = function (app, mongo) {
         return defer.promise;
     }
 
-    app.get('/api/news', function (req, res) {
+    app.get('/api/news', cors(), function (req, res) {
         mongo.then((db) => {
             let data = [];
             let databases = [];

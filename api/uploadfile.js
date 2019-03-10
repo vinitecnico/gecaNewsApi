@@ -2,6 +2,7 @@
 const status = require('http-status');
 const FileReader = require('filereader');
 const moment = require('moment');
+const cors = require("cors");
 const fetch = require('isomorphic-fetch');
 const multer = require('multer');
 const Dropbox = require('dropbox').Dropbox;
@@ -12,7 +13,7 @@ const dbx = new Dropbox({ accessToken: config.keyDropbox, fetch: fetch });
 module.exports = function (app) {    
     const storage = multer.memoryStorage({});
     const upload = multer({ storage: storage }).single('file');
-    app.post('/api/uploadfile', function (req, res) {
+    app.post('/api/uploadfile', cors(), function (req, res) {
         const params = req.body;
         upload(req, res, function (err) {
             if (err) {

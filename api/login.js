@@ -2,10 +2,11 @@
 
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
+const cors = require("cors");
 const config = require('../config/config');
 
 module.exports = function (app, mongo) {
-    app.post('/api/login', function (req, res) {
+    app.post('/api/login', cors(), function (req, res) {
         const params = req.body;
         const user = { email: params.username, password: md5(params.password) };
         mongo.then((db) => {            
