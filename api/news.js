@@ -118,6 +118,8 @@ module.exports = function (app, mongo) {
                                             }
                                             data.push(item);
                                         });
+                                    } else {
+                                        data.concat(x);
                                     }
                                 });
                             }
