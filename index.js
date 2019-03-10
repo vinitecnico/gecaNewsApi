@@ -4,6 +4,7 @@ const graphqlHTTP = require("express-graphql");
 const db = mongoose();
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,7 +49,7 @@ require('./api/login')(app, db);
 require('./api/uploadfile')(app);
 require('./api/news')(app, db);
 
-const cors = require('cors')
+
 
 var corsOptions = {
   origin: '*',
